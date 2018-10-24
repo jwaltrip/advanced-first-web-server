@@ -29,6 +29,7 @@ app.get('/users/:id', (req, res, next) => {
   return res.send(users[req.params.id]);
 });
 
+// POST
 app.post('/users', (req, res, next) => {
   const postedData = {
     "_id": 6,
@@ -38,6 +39,20 @@ app.post('/users', (req, res, next) => {
   };
 
   users.push(postedData);
+
+  return res.send(users[users.length - 1]);
+});
+
+// PUT
+app.put('/users/:id', (req, res, next) => {
+  users[req.params.id].name = "Bob";
+
+  return res.send(users[users.length - 1]);
+});
+
+// DELETE
+app.delete('/users/:id', (req, res, next) => {
+  users.splice(req.params.id, 1);
 
   return res.send(users);
 });
