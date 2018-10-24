@@ -47,7 +47,7 @@ app.post('/users', (req, res, next) => {
 app.put('/users/:id', (req, res, next) => {
   users[req.params.id].name = "Bob";
 
-  return res.send(users[users.length - 1]);
+  return res.send(users[req.params.id]);
 });
 
 // DELETE

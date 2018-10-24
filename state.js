@@ -37,6 +37,6 @@ exports.users = [
   },
   {
     "_id": 7,
-    "name": ``
+    "name": ''
   }
 ]
