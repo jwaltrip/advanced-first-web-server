@@ -39,9 +39,11 @@ app.put('/users/:id', (req, res, next) => {
 
 // DELETE
 app.delete('/users/:id', (req, res, next) => {
-  users.splice(req.params.id, 1);
+  // we dont want to actually delete the object
+  // just add a boolean flag marking it as inactive
+  users[req.params.id].isActive = false;
 
-  return res.json(users);
+  return res.send("deleted");
 });
 
 // handle incorrect API calls
