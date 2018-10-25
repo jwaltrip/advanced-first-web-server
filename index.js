@@ -57,6 +57,11 @@ app.delete('/users/:id', (req, res, next) => {
   return res.json(users);
 });
 
+// handle incorrect API calls
+app.use((req, res, next) => {
+  return res.send("ERROR INVALID URL");
+});
+
 app.listen(3002, (err) => {
   if (err) {
     return console.log("Error", err);
