@@ -1,24 +1,11 @@
-let express = require("express");
+const express = require("express");
+const bodyParser = require('body-parser');
 let users = require('./state').users;
-
-// TODO finish part 1 of homework for next class
-
-// const usersArr = users.users;
 
 const app = express();
 
 app.use(express.static('public'));
-
-// GET full users array in state.js
-// app.use((req,res,next) => {
-//   if (req.path === '/users') {
-//     return res.send(users);
-//   } else if (req.path === '/users/1') {
-//     return res.send(users[0]);
-//   } else {
-//     return res.send("GIMME A PATH!");
-//   }
-// });
+app.use(bodyParser.json());
 
 app.get('/users', (req, res, next) => {
   return res.json(users);
@@ -31,14 +18,14 @@ app.get('/users/:id', (req, res, next) => {
 
 // POST
 app.post('/users', (req, res, next) => {
-  const postedData = {
-    "_id": 6,
-    "name": "Hue Jazz",
-    "occupation": "getting money",
-    "avatar": "Look ova here"
+  // get name from req.body
+  // increment _id +1
+  const newUser = {
+    _id: users[users.length-1]._id + 1,
+    name: req.body.name
   };
 
-  users.push(postedData);
+  users.push(newUser);
 
   return res.json(users[users.length - 1]);
 });
@@ -58,6 +45,8 @@ app.delete('/users/:id', (req, res, next) => {
 });
 
 // handle incorrect API calls
+// order of these routes matters
+// put this last
 app.use((req, res, next) => {
   return res.send("ERROR INVALID URL");
 });
