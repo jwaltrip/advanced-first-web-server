@@ -25,8 +25,10 @@ app.post('/users', (req, res, next) => {
     name: req.body.name
   };
 
+  // add new user to users array
   users.push(newUser);
 
+  // return the item just added
   return res.json(users[users.length - 1]);
 });
 
@@ -34,6 +36,7 @@ app.post('/users', (req, res, next) => {
 app.put('/users/:id', (req, res, next) => {
   users[req.params.id].name = "Bob";
 
+  // return item just updated
   return res.json(users[req.params.id]);
 });
 
@@ -43,6 +46,7 @@ app.delete('/users/:id', (req, res, next) => {
   // just add a boolean flag marking it as inactive
   users[req.params.id].isActive = false;
 
+  // return text notifying that object was deleted
   return res.send("deleted");
 });
 
@@ -53,6 +57,7 @@ app.use((req, res, next) => {
   return res.send("ERROR INVALID URL");
 });
 
+// tell server to listen on port 3002
 app.listen(3002, (err) => {
   if (err) {
     return console.log("Error", err);
