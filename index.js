@@ -21,12 +21,12 @@ app.use(express.static('public'));
 // });
 
 app.get('/users', (req, res, next) => {
-  return res.send(users);
+  return res.json(users);
 });
 
 // GET specific ID of users array in state.js
 app.get('/users/:id', (req, res, next) => {
-  return res.send(users[req.params.id]);
+  return res.json(users[req.params.id]);
 });
 
 // POST
@@ -40,21 +40,21 @@ app.post('/users', (req, res, next) => {
 
   users.push(postedData);
 
-  return res.send(users[users.length - 1]);
+  return res.json(users[users.length - 1]);
 });
 
 // PUT
 app.put('/users/:id', (req, res, next) => {
   users[req.params.id].name = "Bob";
 
-  return res.send(users[req.params.id]);
+  return res.json(users[req.params.id]);
 });
 
 // DELETE
 app.delete('/users/:id', (req, res, next) => {
   users.splice(req.params.id, 1);
 
-  return res.send(users);
+  return res.json(users);
 });
 
 app.listen(3002, (err) => {
