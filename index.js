@@ -13,7 +13,9 @@ app.get('/users', (req, res, next) => {
 
 // GET specific ID of users array in state.js
 app.get('/users/:id', (req, res, next) => {
-  return res.json(users[req.params.id]);
+  // find the _id of the user to get
+  const user = users.find(u => u._id === req.params.id);
+  return res.json(user);
 });
 
 // POST
@@ -42,9 +44,12 @@ app.put('/users/:id', (req, res, next) => {
 
 // DELETE
 app.delete('/users/:id', (req, res, next) => {
+  // find the _id of the user to get
+  const user = users.find(u => u._id === req.params.id);
+
   // we dont want to actually delete the object
   // just add a boolean flag marking it as inactive
-  users[req.params.id].isActive = false;
+  user.isActive = false;
 
   // return text notifying that object was deleted
   return res.send("deleted");
