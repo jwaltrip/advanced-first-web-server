@@ -8,7 +8,9 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.get('/users', (req, res, next) => {
-  return res.json(users);
+  // only display the users that have isActive = true
+  const filteredUsers = users.filter(u => u.isActive);
+  return res.json(filteredUsers);
 });
 
 // GET specific ID of users array in state.js
